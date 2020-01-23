@@ -11,7 +11,10 @@ class HomeBodyWidget extends StatefulWidget {
 class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   final GlobalKey _globalKey = GlobalKey();
   final Random _random = Random();
+  final List<double> _bottomList = [-300, -150, -100, -50, 0];
+
   List<Widget> _widets = [];
+  double _bottomPosition = -300;
 
   Size _getSizeOfStack() {
     final RenderBox renderBox = _globalKey.currentContext.findRenderObject();
@@ -23,9 +26,12 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
     final double offset = _random.nextDouble() + 1.0; // 0.5 ~ 1.5 
     final double xPosition = _random.nextDouble() * size.width;
     final Widget widget = PhysicsAnimatedImageWidget(x: xPosition, endY: size.height, size: 24, offset: offset,);
-
+    
     setState(() {
       _widets.add(widget);
+
+      final int bottomListIndex = _widets.length ~/ 50;
+      _bottomPosition = bottomListIndex >= _bottomList.length ? _bottomList.last : _bottomList[bottomListIndex];
     });
   }
 
@@ -49,9 +55,10 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
         Stack(
           children: _widets,
         ),
-        Positioned(
-          left: 0,
-          bottom: 0,
+        AnimatedPositioned(
+          curve: Curves.elasticInOut,
+          duration: Duration(milliseconds: 1500),
+          bottom: _bottomPosition,
           child: Image(
             image: Assets.imgDiamondMountain,
             fit: BoxFit.fitWidth,
