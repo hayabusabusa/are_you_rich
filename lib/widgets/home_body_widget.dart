@@ -33,6 +33,7 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   Widget build(BuildContext context) {
     return Stack(
       key: _globalKey,
+      fit: StackFit.expand,
       children: <Widget>[
         Center(
           child: AYRImageButton(
@@ -48,7 +49,15 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
         Stack(
           children: _widets,
         ),
-      ],
+        Positioned(
+          left: 0,
+          bottom: 0,
+          child: Image(
+            image: Assets.imgDiamondMountain,
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ]
     );
   }
 }
