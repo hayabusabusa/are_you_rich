@@ -40,6 +40,11 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
             onPressed: () { _onPressed(); },
           ),
         ),
+        Positioned(
+          right: 8,
+          top: 8,
+          child: HomeScoreWidget(image: Image(image: Assets.icDiamond,), value: _widets.length,),
+        ),
         Stack(
           children: _widets,
         ),
