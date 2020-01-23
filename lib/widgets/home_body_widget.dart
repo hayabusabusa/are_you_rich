@@ -10,6 +10,7 @@ class HomeBodyWidget extends StatefulWidget {
 
 class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   final GlobalKey _globalKey = GlobalKey();
+  final Random _random = Random();
   List<Widget> _widets = [];
 
   Size _getSizeOfStack() {
@@ -18,15 +19,10 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   }
   
   void _onPressed() {
-    final double width = _getSizeOfStack().width;
-    final double xPosition = Random().nextDouble() * width;
-    final Widget widget = Positioned(
-      left: xPosition,
-      top: 0,
-      width: 24,
-      height: 24,
-      child: Container(color: Colors.blue,),
-    );
+    final Size size = _getSizeOfStack();
+    final double offset = _random.nextInt(5).toDouble();
+    final double xPosition = _random.nextDouble() * size.width;
+    final Widget widget = PhysicsAnimatedImageWidget(x: xPosition, endY: size.height, size: 24, offset: offset,);
 
     setState(() {
       _widets.add(widget);
@@ -38,15 +34,15 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
     return Stack(
       key: _globalKey,
       children: <Widget>[
+        Stack(
+          children: _widets,
+        ),
         Center(
           child: AYRImageButton(
             image: Image(image: Assets.icDiamond),
             onPressed: () { _onPressed(); },
           ),
         ),
-        Stack(
-          children: _widets,
-        )
       ],
     );
   }
