@@ -17,7 +17,11 @@ class AYRImageButton extends StatelessWidget {
       height: 72,
       child: FloatingActionButton(
         backgroundColor: Colors.white,
-        child: image,
+        child: SizedBox(
+          width: 32,
+          height: 32,
+          child: image,
+        ),
         onPressed: onPressed,
       ),
     );

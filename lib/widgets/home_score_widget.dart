@@ -17,7 +17,11 @@ class HomeScoreWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: <Widget>[
-            image,
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: image,
+            ),
             SizedBox(width: 8,),
             Text('x $value'),
           ],
