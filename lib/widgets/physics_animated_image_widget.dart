@@ -48,8 +48,9 @@ class _PhysicsAnimatedImageWidgetState extends State<PhysicsAnimatedImageWidget>
       top: _controller.value,
       width: widget.size * widget.offset,
       height: widget.size * widget.offset,
-      child: Container(
-        child: Image(image: Assets.icDiamond,),
+      child: Image(
+        image: Assets.icDiamond,
+        fit: BoxFit.contain
       ),
     );
   }
